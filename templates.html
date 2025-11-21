@@ -634,4 +634,14 @@
         alert('Je winkelmand is nog leeg.');
         return;
       }
-      const name = document.getElementById('acc-name').
+      const name = document.getElementById('acc-name').value.trim();
+      const email = document.getElementById('acc-email').value.trim();
+      const org = document.getElementById('acc-org').value.trim();
+      const notes = document.getElementById('acc-notes').value.trim();
+
+      if (!name || !email) {
+        alert('Vul minimaal je naam en e-mailadres in bij je gegevens.');
+        return;
+      }
+
+      let body = `Hallo,%0D%0A%0D%0AIk wil graag de volgende 
