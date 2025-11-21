@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <title>Slimme Templates – Webshop</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Webshop met kant-en-klare templates en Excel-sjablonen voor kleine bedrijven, verenigingen en clubs. Voeg toe aan winkelmand, kies pakket en bestel online.">
+  <meta name="description" content="Overzichtelijke webshop met kant-en-klare templates en Excel-sjablonen voor kleine bedrijven, verenigingen en clubs. Kies categorie, stel je pakket samen en bestel online.">
   <style>
     :root {
       --bg: #020617;
@@ -45,6 +45,7 @@
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      cursor: pointer;
     }
 
     .brand-logo {
@@ -215,6 +216,44 @@
       color: var(--text-soft);
     }
 
+    .choices-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(230px,1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .choice-card {
+      background: var(--card-bg);
+      border-radius: 1rem;
+      padding: 1rem;
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 10px 25px rgba(15,23,42,0.05);
+    }
+
+    .choice-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1.02rem;
+    }
+
+    .choice-card p {
+      margin: 0 0 0.6rem;
+      font-size: 0.87rem;
+      color: var(--text-soft);
+    }
+
+    .choice-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.75rem;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: #166534;
+      margin-bottom: 0.4rem;
+    }
+
     .product-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
@@ -321,10 +360,11 @@
       color: var(--text-soft);
     }
 
-    .layout {
+    .two-column {
       display: grid;
-      grid-template-columns: minmax(0,1.6fr) minmax(0,1fr);
+      grid-template-columns: minmax(0,1.5fr) minmax(0,1.1fr);
       gap: 1rem;
+      margin-bottom: 2rem;
       align-items: flex-start;
     }
 
@@ -347,6 +387,23 @@
       color: var(--text-soft);
     }
 
+    ul {
+      padding-left: 1.2rem;
+      margin: 0.4rem 0;
+      font-size: 0.87rem;
+      color: var(--text-soft);
+    }
+
+    li + li { margin-top: 0.25rem; }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0,1.6fr) minmax(0,1fr);
+      gap: 1rem;
+      align-items: flex-start;
+      margin-top: 1.5rem;
+    }
+
     .cart-items {
       border-top: 1px solid #e5e7eb;
       margin-top: 0.6rem;
@@ -364,9 +421,7 @@
       border-bottom: 1px dashed #e5e7eb;
     }
 
-    .cart-item:last-child {
-      border-bottom: none;
-    }
+    .cart-item:last-child { border-bottom: none; }
 
     .cart-item-title {
       font-weight: 500;
@@ -444,13 +499,18 @@
       text-underline-offset: 2px;
     }
 
+    /* Mobiel */
+    #cart-button-mobile { display: none; }
+
     @media (max-width: 820px) {
       nav { display: none; }
       header { padding-inline: 1rem; }
       main { padding-inline: 1rem; }
       .hero { padding-inline: 1.1rem; border-radius: 1.2rem; }
       .hero h2 { font-size: 1.35rem; }
+      .two-column { grid-template-columns: minmax(0,1fr); }
       .layout { grid-template-columns: minmax(0,1fr); }
+      #cart-button-mobile { display: inline-flex; }
     }
 
     @media (max-width: 480px) {
@@ -461,50 +521,97 @@
 </head>
 <body>
   <header>
-    <div class="brand">
+    <div class="brand" onclick="scrollToTop()">
       <div class="brand-logo">ST</div>
       <div>
         <h1>Slimme Templates</h1>
       </div>
     </div>
     <nav>
+      <a href="#keuze">Start</a>
       <a href="#producten">Templates</a>
-      <a href="#account">Mijn account</a>
+      <a href="#uitleg">Hoe het werkt</a>
+      <a href="#account">Mijn gegevens</a>
       <button class="cart-button" type="button" onclick="scrollToCart()">
         🧺 Winkelmand
         <span class="cart-badge" id="cart-count">0</span>
       </button>
     </nav>
-    <button class="cart-button" type="button" onclick="scrollToCart()" style="display:none;" id="cart-button-mobile">
+    <button class="cart-button" type="button" onclick="scrollToCart()" id="cart-button-mobile">
       🧺 <span class="cart-badge" id="cart-count-mobile">0</span>
     </button>
   </header>
 
   <main>
-    <section class="hero">
+    <section class="hero" id="top">
       <div class="hero-highlight">
-        <span class="icon">⚡</span>
-        <span>Online bestellen – digitale templates direct na betaling</span>
+        <span class="icon">🎯</span>
+        <span>Overzichtelijke webshop voor kleine organisaties</span>
       </div>
-      <h2>Stel je eigen pakket samen met slimme templates voor jouw organisatie.</h2>
+      <h2>Eerst kiezen, dan samenstellen, daarna pas afrekenen.</h2>
       <p>
-        Kies per document hoe uitgebreid je het wilt: Basis, Plus of Pro. Voeg alles toe aan je winkelmand,
-        vul je gegevens in en ontvang na betaling de bestanden per e-mail.
+        Slimme digitale templates voor MKB, verenigingen en clubs. Je kiest eerst wat je ongeveer nodig hebt,
+        daarna stel je per template het juiste pakket samen en voeg je alles toe aan je winkelmand.
       </p>
       <div class="hero-actions">
-        <a href="#producten" class="btn-primary">
-          <span class="icon">📦</span>
-          <span>Start met samenstellen</span>
+        <a href="#keuze" class="btn-primary">
+          <span class="icon">👇</span>
+          <span>Begin bij het keuzemenu</span>
         </a>
-        <span class="hero-meta">Geen abonnement. Gewoon eenmalig betalen per template of bundel.</span>
+        <span class="hero-meta">Geen abonnement, gewoon eenmalig betalen per template of bundel.</span>
       </div>
     </section>
 
-    <section id="producten">
-      <div class="section-label">Shop</div>
+    <!-- Keuzemenu / overzicht -->
+    <section id="keuze">
+      <div class="section-label">Stap 1</div>
       <div class="section-header">
-        <h3>Templates met uitbreidingsopties</h3>
-        <p>Kies per template het pakket dat bij jouw organisatie past. De prijs past zich automatisch aan.</p>
+        <h3>Kies waar je templates voor zoekt</h3>
+        <p>Klik op een categorie hieronder. Je gaat dan automatisch naar de relevante templates.</p>
+      </div>
+
+      <div class="choices-grid">
+        <article class="choice-card">
+          <div class="choice-tag">💶 Geld & administratie</div>
+          <h4>Onkosten, kleine kas & declaraties</h4>
+          <p>
+            Handige formulieren en spreadsheets om onkosten, kleine kas en contante kassa netjes bij te houden.
+          </p>
+          <button class="btn-outline" type="button" onclick="filterProducts('geld')">
+            Bekijk templates voor geldzaken
+          </button>
+        </article>
+
+        <article class="choice-card">
+          <div class="choice-tag">📅 Roosters & planning</div>
+          <h4>Vrijwilligers, diensten & teams</h4>
+          <p>
+            Roosters voor bardiensten, vrijwilligers, trainingen of diensten. In één oogopslag overzicht.
+          </p>
+          <button class="btn-outline" type="button" onclick="filterProducts('rooster')">
+            Bekijk templates voor roosters
+          </button>
+        </article>
+
+        <article class="choice-card">
+          <div class="choice-tag">📦 Compleet pakket</div>
+          <h4>Alle templates in één bundel</h4>
+          <p>
+            Direct goed geregeld? Kies de complete bundel met alle templates, met extra korting.
+          </p>
+          <button class="btn-outline" type="button" onclick="filterProducts('bundel')">
+            Bekijk de bundel
+          </button>
+        </article>
+      </div>
+    </section>
+
+    <!-- Producten -->
+    <section id="producten">
+      <div class="section-label">Stap 2</div>
+      <div class="section-header">
+        <h3>Kies je templates en stel je pakket samen</h3>
+        <p>Per template kies je Basis, Plus of Pro. Voeg daarna toe aan je winkelmand.</p>
       </div>
 
       <div class="product-grid" id="product-grid">
@@ -512,9 +619,43 @@
       </div>
     </section>
 
+    <!-- Uitleg -->
+    <section id="uitleg" class="two-column">
+      <article class="panel">
+        <h3>Hoe werkt bestellen?</h3>
+        <p>We houden het bewust eenvoudig, zonder ingewikkelde accounts of portals.</p>
+        <ul>
+          <li>Kies een categorie in het keuzemenu.</li>
+          <li>Stel per template het pakket samen (Basis, Plus, Pro).</li>
+          <li>Voeg alles toe aan je winkelmand.</li>
+          <li>Vul je gegevens in bij "Mijn gegevens".</li>
+          <li>Klik op "Bestelling afronden" in de winkelmand.</li>
+        </ul>
+        <p>
+          Er wordt dan een e-mailbericht geopend met jouw bestelling. Na betaling ontvang je de bestanden
+          (Excel / Sheets / PDF) per e-mail.
+        </p>
+      </article>
+
+      <article class="panel">
+        <h3>Voor wie is dit bedoeld?</h3>
+        <ul>
+          <li>Kleine ondernemers die geen tijd hebben om zelf Excel-templates te bouwen.</li>
+          <li>Penningmeesters en bestuurders van verenigingen en stichtingen.</li>
+          <li>Sportclubs met kantine, teams en vrijwilligersroosters.</li>
+          <li>Iedereen die praktisch overzicht wil zonder dure software.</li>
+        </ul>
+        <p>
+          Met AI kunnen we snel nieuwe varianten maken. Heb je een specifieke wens?
+          Laat het weten bij de opmerkingen, dan kijken we wat mogelijk is.
+        </p>
+      </article>
+    </section>
+
+    <!-- Winkelmand + account -->
     <section class="layout" id="cart-section">
       <article class="panel">
-        <h3>🧺 Winkelmand</h3>
+        <h3>🧺 Stap 3 – Winkelmand</h3>
         <p class="notice">
           Hier zie je alle templates die je hebt toegevoegd. Je kunt nog aanpassen of verwijderen voordat je bestelt.
         </p>
@@ -532,7 +673,8 @@
           </button>
         </div>
         <p class="notice">
-          Bij het afronden wordt een e-mailbericht geopend met jouw bestelling en gegevens. Je ontvangt daarna betaalinstructies.
+          Bij het afronden wordt een e-mailbericht geopend met jouw bestelling en gegevens.
+          Je ontvangt daarna betaalinstructies en vervolgens de downloadlinks.
         </p>
       </article>
 
@@ -564,20 +706,21 @@
   </main>
 
   <footer>
-    © <span id="jaar"></span> Slimme Templates – Digitale sjablonen voor MKB & verenigingen.  
-    <br>Betaling en levering volgen handmatig na bestelling. Later kan dit uitgebreid worden met automatische betalingen.
+    © <span id="jaar"></span> Slimme Templates – Digitale sjablonen voor MKB & verenigingen.
+    <br>Deze webshop levert geen diensten rond bedrijfsdeuren of montage.
   </footer>
 
   <script>
     // ------------------------
-    // Basis data: producten & varianten
+    // Basis data: producten & categorieën
     // ------------------------
     const PRODUCTS = [
       {
         id: 'onkosten',
         name: 'Onkosten & Declaratie Template',
-        badge: 'Excel / Google Sheets',
-        description: 'Handig formulier voor medewerkers, vrijwilligers of leden om onkosten simpel en netjes in te dienen.',
+        badge: '💶 Geld & administratie',
+        category: 'geld',
+        description: 'Formulier en sheet voor medewerkers, vrijwilligers of leden om onkosten simpel en netjes in te dienen.',
         basePrice: 9,
         variants: [
           { id: 'basic', label: 'Basis – voor 1 team/afdeling', price: 9 },
@@ -586,147 +729,13 @@
         ]
       },
       {
-        id: 'rooster',
-        name: 'Vrijwilligers & Dienstenrooster',
-        badge: 'Excel / Google Sheets',
-        description: 'Duidelijk rooster voor bardiensten, trainingen, diensten of shifts. In één oogopslag overzicht.',
-        basePrice: 9,
-        variants: [
-          { id: 'basic', label: 'Basis – 1 rooster met 1 tabblad', price: 9 },
-          { id: 'plus', label: 'Plus – meerdere roosters (bijv. bar + wedstrijden)', price: 17 },
-          { id: 'pro', label: 'Pro – inclusief automatisch overzicht per persoon', price: 27 },
-        ]
-      },
-      {
         id: 'kas',
         name: 'Kleine Kas & Contante Kassa',
-        badge: 'Excel / PDF',
+        badge: '💶 Geld & administratie',
+        category: 'geld',
         description: 'Eenvoudige kasregistratie voor kantines, acties, evenementen en kleine organisaties.',
         basePrice: 9,
         variants: [
           { id: 'basic', label: 'Basis – eenvoudige in/uit-registratie', price: 9 },
           { id: 'plus', label: 'Plus – meerdere kassen + samenvattingssheet', price: 17 },
-          { id: 'pro', label: 'Pro – inclusief kasverschilberekening & logboek', price: 29 },
-        ]
-      },
-      {
-        id: 'bundel',
-        name: 'Complete Bundel (alle templates)',
-        badge: 'Meest gekozen',
-        description: 'Alle templates (onkosten, rooster, kas) in één pakket, in de variant naar keuze.',
-        basePrice: 19,
-        variants: [
-          { id: 'basic', label: 'Basis bundel – alle Basis-varianten', price: 19 },
-          { id: 'plus', label: 'Plus bundel – alle Plus-varianten', price: 35 },
-          { id: 'pro', label: 'Pro bundel – alle Pro-varianten', price: 55 },
-        ]
-      },
-    ];
-
-    let cart = [];
-
-    function formatPrice(value) {
-      return '€ ' + value.toFixed(0).replace('.', ',') + ',-';
-    }
-
-    // ------------------------
-    // Product rendering
-    // ------------------------
-    function renderProducts() {
-      const container = document.getElementById('product-grid');
-      container.innerHTML = '';
-
-      PRODUCTS.forEach(product => {
-        const card = document.createElement('article');
-        card.className = 'card';
-
-        const badge = document.createElement('div');
-        badge.className = 'card-badge';
-        badge.textContent = product.badge;
-
-        const title = document.createElement('h4');
-        title.textContent = product.name;
-
-        const desc = document.createElement('p');
-        desc.textContent = product.description;
-
-        const priceEl = document.createElement('p');
-        priceEl.className = 'price';
-        priceEl.textContent = formatPrice(product.basePrice) + ' ';
-        const span = document.createElement('span');
-        span.textContent = '(verstuurde bestanden digitaal)';
-        priceEl.appendChild(span);
-
-        const variantWrapper = document.createElement('div');
-        variantWrapper.className = 'variant-select-wrapper';
-
-        const label = document.createElement('div');
-        label.className = 'variant-select-label';
-        label.textContent = 'Kies pakket-niveau:';
-        const select = document.createElement('select');
-        select.id = `variant-${product.id}`;
-        product.variants.forEach(variant => {
-          const opt = document.createElement('option');
-          opt.value = variant.id;
-          opt.textContent = `${variant.label} – ${formatPrice(variant.price)}`;
-          select.appendChild(opt);
-        });
-
-        variantWrapper.appendChild(label);
-        variantWrapper.appendChild(select);
-
-        const footer = document.createElement('div');
-        footer.className = 'card-footer';
-
-        const btnAdd = document.createElement('button');
-        btnAdd.type = 'button';
-        btnAdd.className = 'btn-outline';
-        btnAdd.innerHTML = '➕ Toevoegen aan winkelmand';
-        btnAdd.addEventListener('click', () => addToCart(product.id));
-
-        const note = document.createElement('span');
-        note.className = 'note';
-        note.textContent = 'Digitale levering na betaling.';
-
-        footer.appendChild(btnAdd);
-        footer.appendChild(note);
-
-        card.appendChild(badge);
-        card.appendChild(title);
-        card.appendChild(desc);
-        card.appendChild(priceEl);
-        card.appendChild(variantWrapper);
-        card.appendChild(footer);
-
-        container.appendChild(card);
-      });
-    }
-
-    // ------------------------
-    // Cart logic
-    // ------------------------
-    function addToCart(productId) {
-      const product = PRODUCTS.find(p => p.id === productId);
-      if (!product) return;
-
-      const select = document.getElementById(`variant-${product.id}`);
-      const variantId = select ? select.value : product.variants[0].id;
-      const variant = product.variants.find(v => v.id === variantId);
-
-      const existing = cart.find(
-        item => item.productId === product.id && item.variantId === variant.id
-      );
-      if (existing) {
-        existing.qty += 1;
-      } else {
-        cart.push({
-          productId: product.id,
-          name: product.name,
-          variantId: variant.id,
-          variantLabel: variant.label,
-          price: variant.price,
-          qty: 1
-        });
-      }
-
-      saveCart(
+          { id: 'pro', 
