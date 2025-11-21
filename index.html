@@ -499,18 +499,22 @@
       text-underline-offset: 2px;
     }
 
-    /* Mobiel */
     #cart-button-mobile { display: none; }
 
     @media (max-width: 820px) {
-      nav { display: none; }
+      nav {
+        display: flex;
+        gap: 0.5rem;
+        font-size: 0.8rem;
+        flex-wrap: wrap;
+      }
       header { padding-inline: 1rem; }
       main { padding-inline: 1rem; }
       .hero { padding-inline: 1.1rem; border-radius: 1.2rem; }
       .hero h2 { font-size: 1.35rem; }
       .two-column { grid-template-columns: minmax(0,1fr); }
       .layout { grid-template-columns: minmax(0,1fr); }
-      #cart-button-mobile { display: inline-flex; }
+      #cart-button-mobile { display: none; }
     }
 
     @media (max-width: 480px) {
@@ -537,9 +541,6 @@
         <span class="cart-badge" id="cart-count">0</span>
       </button>
     </nav>
-    <button class="cart-button" type="button" onclick="scrollToCart()" id="cart-button-mobile">
-      🧺 <span class="cart-badge" id="cart-count-mobile">0</span>
-    </button>
   </header>
 
   <main>
@@ -562,7 +563,6 @@
       </div>
     </section>
 
-    <!-- Keuzemenu / overzicht -->
     <section id="keuze">
       <div class="section-label">Stap 1</div>
       <div class="section-header">
@@ -606,7 +606,6 @@
       </div>
     </section>
 
-    <!-- Producten -->
     <section id="producten">
       <div class="section-label">Stap 2</div>
       <div class="section-header">
@@ -614,12 +613,9 @@
         <p>Per template kies je Basis, Plus of Pro. Voeg daarna toe aan je winkelmand.</p>
       </div>
 
-      <div class="product-grid" id="product-grid">
-        <!-- Productkaarten worden door JavaScript ingevuld -->
-      </div>
+      <div class="product-grid" id="product-grid"></div>
     </section>
 
-    <!-- Uitleg -->
     <section id="uitleg" class="two-column">
       <article class="panel">
         <h3>Hoe werkt bestellen?</h3>
@@ -652,16 +648,13 @@
       </article>
     </section>
 
-    <!-- Winkelmand + account -->
     <section class="layout" id="cart-section">
       <article class="panel">
         <h3>🧺 Stap 3 – Winkelmand</h3>
         <p class="notice">
           Hier zie je alle templates die je hebt toegevoegd. Je kunt nog aanpassen of verwijderen voordat je bestelt.
         </p>
-        <div id="cart-items" class="cart-items">
-          <!-- Winkelmand-items komen hier -->
-        </div>
+        <div id="cart-items" class="cart-items"></div>
         <div class="cart-summary">
           <div>
             Totaal (incl. btw, digitale levering):<br>
@@ -711,9 +704,6 @@
   </footer>
 
   <script>
-    // ------------------------
-    // Basis data: producten & categorieën
-    // ------------------------
     const PRODUCTS = [
       {
         id: 'onkosten',
@@ -738,4 +728,15 @@
         variants: [
           { id: 'basic', label: 'Basis – eenvoudige in/uit-registratie', price: 9 },
           { id: 'plus', label: 'Plus – meerdere kassen + samenvattingssheet', price: 17 },
-          { id: 'pro', 
+          { id: 'pro', label: 'Pro – inclusief kasverschilberekening & logboek', price: 29 },
+        ]
+      },
+      {
+        id: 'rooster',
+        name: 'Vrijwilligers & Dienstenrooster',
+        badge: '📅 Roosters & planning',
+        category: 'rooster',
+        description: 'Duidelijk rooster voor bardiensten, trainingen, diensten of shifts. In één oogopslag overzicht.',
+        basePrice: 9,
+        variants: [
+          { id: 'basic', label: 'Basis – 1 rooster met 1 
