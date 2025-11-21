@@ -2,193 +2,568 @@
 <html lang="nl">
 <head>
   <meta charset="UTF-8" />
-  <title>Webshop Bedrijfsdeuren - Kerkhoff</title>
+  <title>Slimme Templates voor MKB & Verenigingen</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Bedrijfsdeuren, overheaddeuren en sectionaaldeuren voor bedrijven. Offerte binnen 24 uur." />
+  <meta name="description" content="Direct downloadbare templates en checklists voor kleine bedrijven, verenigingen en clubs. Bespaar tijd met kant-en-klare formulieren en Excel-sjablonen." />
   <style>
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      margin: 0;
-      background: #f5f5f5;
-      color: #111827;
+    :root {
+      --bg: #0f172a;
+      --accent: #22c55e;
+      --accent-soft: rgba(34,197,94,0.1);
+      --text-main: #0f172a;
+      --text-soft: #6b7280;
+      --border-soft: #e5e7eb;
+      --card-bg: #ffffff;
     }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f3f4f6;
+      color: var(--text-main);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
     header {
-      background: #111827;
-      color: white;
-      padding: 1rem 1.5rem;
+      background: var(--bg);
+      color: #ffffff;
+      padding: 0.9rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    header .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .brand-logo {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, #22c55e, #16a34a 50%, #064e3b);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.9rem;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1rem;
+      letter-spacing: 0.03em;
+    }
+
+    nav {
+      display: flex;
+      gap: 0.75rem;
+      font-size: 0.9rem;
+    }
+
+    nav a {
+      padding: 0.35rem 0.8rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+    }
+
+    nav a:hover {
+      border-color: rgba(148,163,184,0.8);
+      background: rgba(15,23,42,0.6);
+    }
+
+    main {
+      padding: 1.5rem 1rem 3rem;
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    .hero {
+      background: radial-gradient(circle at top left, rgba(34,197,94,0.12), transparent 55%),
+                  radial-gradient(circle at bottom right, rgba(59,130,246,0.12), transparent 55%),
+                  #0b1220;
+      color: #e5e7eb;
+      border-radius: 1.5rem;
+      padding: 1.75rem 1.5rem;
+      margin-bottom: 1.75rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero h2 {
+      margin: 0;
+      font-size: 1.6rem;
+    }
+
+    .hero p {
+      margin: 0.6rem 0;
+      font-size: 0.95rem;
+      max-width: 540px;
+    }
+
+    .hero-highlight {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.18rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.4);
+      font-size: 0.75rem;
+      color: #cbd5f5;
+      background: rgba(15,23,42,0.7);
+    }
+
+    .hero-highlight span.icon {
+      padding: 0.15rem 0.33rem;
+      border-radius: 999px;
+      background: rgba(34,197,94,0.15);
+      font-size: 0.8rem;
+    }
+
+    .hero-actions {
+      margin-top: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      padding: 0.7rem 1.4rem;
+      border-radius: 999px;
+      border: none;
+      background: linear-gradient(135deg,#22c55e,#16a34a);
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .btn-primary span.icon {
+      font-size: 1.1rem;
+    }
+
+    .hero-meta {
+      font-size: 0.75rem;
+      color: #9ca3af;
+    }
+
+    .products {
+      margin-bottom: 2rem;
+    }
+
+    .section-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+      margin-bottom: 0.3rem;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .section-header h3 {
+      margin: 0;
+      font-size: 1.25rem;
+    }
+
+    .section-header p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: var(--text-soft);
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(230px,1fr));
+      gap: 1rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 1rem;
+      padding: 1rem;
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 16px 40px rgba(15,23,42,0.06);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 210px;
+    }
+
+    .card-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.18rem 0.5rem;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      background: var(--accent-soft);
+      color: #166534;
+      margin-bottom: 0.5rem;
+    }
+
+    .card h4 {
+      margin: 0 0 0.4rem;
+      font-size: 1rem;
+    }
+
+    .card p {
+      margin: 0 0 0.4rem;
+      font-size: 0.88rem;
+      color: var(--text-soft);
+    }
+
+    .price {
+      font-weight: 700;
+      margin-top: 0.4rem;
+      font-size: 0.95rem;
+    }
+
+    .price span {
+      font-weight: 400;
+      font-size: 0.8rem;
+      color: var(--text-soft);
+    }
+
+    .card-footer {
+      margin-top: 0.7rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
     }
-    header h1 {
-      font-size: 1.1rem;
-      margin: 0;
-    }
-    nav a {
-      color: white;
-      text-decoration: none;
-      margin-left: 1rem;
-      font-size: 0.9rem;
-    }
-    main {
-      padding: 1.5rem;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-    .hero {
-      background: white;
-      border-radius: 0.75rem;
-      padding: 1.5rem;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.04);
-      margin-bottom: 1.5rem;
-    }
-    .hero h2 {
-      margin-top: 0;
-      font-size: 1.5rem;
-    }
-    .hero p {
-      margin-bottom: 0.75rem;
-    }
-    .btn-primary {
-      display: inline-block;
-      padding: 0.75rem 1.25rem;
+
+    .btn-outline {
+      padding: 0.45rem 0.9rem;
       border-radius: 999px;
-      border: none;
-      background: #2563eb;
-      color: white;
-      font-weight: 600;
-      font-size: 0.95rem;
+      border: 1px solid var(--border-soft);
+      font-size: 0.85rem;
+      background: #f9fafb;
+      cursor: pointer;
       text-decoration: none;
     }
-    .products {
+
+    .btn-outline:hover {
+      background: #eef2ff;
+      border-color: #c4b5fd;
+    }
+
+    .note {
+      font-size: 0.8rem;
+      color: var(--text-soft);
+    }
+
+    .two-column {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      grid-template-columns: minmax(0,1.4fr) minmax(0,1fr);
       gap: 1rem;
       margin-bottom: 2rem;
     }
-    .card {
-      background: white;
-      border-radius: 0.75rem;
+
+    .panel {
+      background: var(--card-bg);
+      border-radius: 1rem;
       padding: 1rem;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.04);
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 14px 30px rgba(15,23,42,0.05);
     }
-    .card h3 {
-      margin-top: 0;
+
+    .panel h3 {
+      margin: 0 0 0.5rem;
       font-size: 1.1rem;
     }
-    .price {
-      font-weight: 700;
-      margin: 0.5rem 0;
+
+    .panel p {
+      margin: 0.25rem 0;
+      font-size: 0.88rem;
+      color: var(--text-soft);
     }
-    .small {
-      font-size: 0.85rem;
-      color: #6b7280;
+
+    ul {
+      padding-left: 1.2rem;
+      margin: 0.4rem 0;
+      font-size: 0.88rem;
+      color: var(--text-soft);
     }
-    .contact {
-      background: white;
-      border-radius: 0.75rem;
-      padding: 1rem;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.04);
-      margin-bottom: 2rem;
+
+    li + li {
+      margin-top: 0.25rem;
     }
-    label {
+
+    .contact-form label {
       display: block;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       margin-bottom: 0.25rem;
+      font-weight: 500;
     }
-    input, textarea {
+
+    .contact-form input,
+    .contact-form textarea {
       width: 100%;
-      padding: 0.5rem;
-      border-radius: 0.5rem;
+      padding: 0.55rem 0.6rem;
+      border-radius: 0.6rem;
       border: 1px solid #d1d5db;
-      font-size: 0.95rem;
-      margin-bottom: 0.75rem;
-      box-sizing: border-box;
+      font-size: 0.9rem;
+      margin-bottom: 0.7rem;
+      font-family: inherit;
     }
+
+    .contact-form textarea {
+      resize: vertical;
+      min-height: 90px;
+    }
+
     footer {
       text-align: center;
+      padding: 1.5rem 1rem 2rem;
       font-size: 0.8rem;
-      color: #6b7280;
-      padding: 1.5rem 0;
+      color: var(--text-soft);
+    }
+
+    footer a {
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
+
+    @media (max-width: 720px) {
+      header {
+        padding-inline: 1rem;
+      }
+      .hero {
+        padding: 1.4rem 1.1rem;
+        border-radius: 1.2rem;
+      }
+      .hero h2 {
+        font-size: 1.35rem;
+      }
+      nav {
+        display: none;
+      }
+      main {
+        padding-inline: 1rem;
+      }
+      .two-column {
+        grid-template-columns: minmax(0,1fr);
+      }
+      .product-grid {
+        grid-template-columns: minmax(0,1fr);
+      }
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>Kerkhoff Bedrijfsdeuren</h1>
+    <div class="brand">
+      <div class="brand-logo">ST</div>
+      <div>
+        <h1>Slimme Templates</h1>
+      </div>
+    </div>
     <nav>
-      <a href="#producten">Producten</a>
-      <a href="#offerte">Offerte</a>
+      <a href="#producten">Templates</a>
+      <a href="#hoe-werkt-het">Hoe het werkt</a>
       <a href="#contact">Contact</a>
     </nav>
   </header>
 
   <main>
     <section class="hero">
-      <h2>Bedrijfsdeuren op maat voor elk bedrijf</h2>
-      <p>Snel, veilig en professioneel geplaatst. Vraag direct online een vrijblijvende offerte aan.</p>
-      <p class="small">Levering en montage in heel Nederland. Persoonlijk contact, korte lijnen.</p>
-      <a href="#offerte" class="btn-primary">Offerte aanvragen</a>
+      <div class="hero-highlight">
+        <span class="icon">⚡</span>
+        <span>Speciaal voor kleine bedrijven, verenigingen en clubs</span>
+      </div>
+      <h2>Direct kant-en-klare templates. Minder administratie. Meer tijd voor de echte dingen.</h2>
+      <p>
+        Handige Excel- en PDF-sjablonen voor bestuur, administratie en organisatie. Geen ingewikkelde software,
+        gewoon downloaden en gebruiken. Ideaal voor kleine ondernemers, penningmeesters, teamleiders en voorzitters.
+      </p>
+      <div class="hero-actions">
+        <a href="#producten" class="btn-primary">
+          <span class="icon">⬇</span>
+          <span>Bekijk de templates</span>
+        </a>
+        <span class="hero-meta">Eenmalig betalen, onbeperkt gebruiken binnen jouw organisatie.</span>
+      </div>
     </section>
 
-    <section id="producten">
-      <h2>Onze bedrijfsdeuren</h2>
-      <div class="products">
+    <section id="producten" class="products">
+      <div class="section-label">Templates</div>
+      <div class="section-header">
+        <h3>Populaire kant-en-klare sjablonen</h3>
+        <p>Kies een losse template of ga voor het complete bundelpakket met korting.</p>
+      </div>
+
+      <div class="product-grid">
         <article class="card">
-          <h3>Sectionaaldeur</h3>
-          <p class="price">Vanaf € 1.495,- excl. montage</p>
-          <p>Geïsoleerde sectionaaldeuren voor bedrijfshallen en werkplaatsen. Verschillende kleuren en vensters mogelijk.</p>
+          <div>
+            <div class="card-badge">Excel / Google Sheets</div>
+            <h4>Onkosten & Declaratie Template</h4>
+            <p>
+              Eenvoudige, duidelijke sheet voor medewerkers, vrijwilligers of leden om onkosten in te dienen.
+              Inclusief datum, omschrijving, categorie en goedkeuring.
+            </p>
+            <p class="price">€ 9,- <span>eenmalig</span></p>
+          </div>
+          <div class="card-footer">
+            <a class="btn-outline" href="mailto:bedrijfsdeurencornald@gmail.com?subject=Onkosten%20template%20bestellen&body=Hallo,%0A%0AIk wil graag de Onkosten%20%26%20Declaratie%20Template bestellen.%0A%0ANaam:%0AOrganisatie:%0A%0AMet vriendelijke groet,%0A">
+              Bestel per e-mail
+            </a>
+            <span class="note">Je ontvangt betaalinstructies + downloadlink.</span>
+          </div>
         </article>
 
         <article class="card">
-          <h3>Snelloopdeur</h3>
-          <p class="price">Prijs op aanvraag</p>
-          <p>Ideaal voor logistieke omgevingen met veel verkeer. Minimaliseert warmteverlies en verbetert de doorstroom.</p>
+          <div>
+            <div class="card-badge">Excel / Google Sheets</div>
+            <h4>Vrijwilligers & Dienstenrooster</h4>
+            <p>
+              Rooster voor diensten, bardiensten, trainingen of teams. In één oogopslag duidelijk wie wanneer ingepland staat.
+              Ideaal voor sportclubs, verenigingen en kleine bedrijven.
+            </p>
+            <p class="price">€ 9,- <span>eenmalig</span></p>
+          </div>
+          <div class="card-footer">
+            <a class="btn-outline" href="mailto:bedrijfsdeurencornald@gmail.com?subject=Rooster%20template%20bestellen&body=Hallo,%0A%0AIk wil graag de Vrijwilligers%20%26%20Dienstenrooster%20Template bestellen.%0A%0ANaam:%0AOrganisatie:%0A%0AMet vriendelijke groet,%0A">
+              Bestel per e-mail
+            </a>
+            <span class="note">Te gebruiken in Excel of Google Sheets.</span>
+          </div>
         </article>
 
         <article class="card">
-          <h3>Overheaddeur</h3>
-          <p class="price">Vanaf € 1.895,-</p>
-          <p>Robuuste overheaddeuren voor intensief gebruik. Uit te voeren met loopdeur en glasopeningen.</p>
+          <div>
+            <div class="card-badge">Excel / PDF</div>
+            <h4>Kleine Kas & Contante Kassa</h4>
+            <p>
+              Hou eenvoudig bij wat er in en uit de kas gaat. Perfect voor kantines, acties, evenementen en
+              kleine organisaties die met contant geld werken.
+            </p>
+            <p class="price">€ 9,- <span>eenmalig</span></p>
+          </div>
+          <div class="card-footer">
+            <a class="btn-outline" href="mailto:bedrijfsdeurencornald@gmail.com?subject=Kleine%20Kas%20template%20bestellen&body=Hallo,%0A%0AIk wil graag de Kleine%20Kas%20%26%20Contante%20Kassa%20Template bestellen.%0A%0ANaam:%0AOrganisatie:%0A%0AMet vriendelijke groet,%0A">
+              Bestel per e-mail
+            </a>
+            <span class="note">Inclusief korte instructie.</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div>
+            <div class="card-badge">Meest gekozen</div>
+            <h4>Complete Bundel (alle templates)</h4>
+            <p>
+              Alle drie de templates in één pakket tegen gereduceerd tarief. Ideaal als je in één keer
+              je administratie en organisatie strak wilt neerzetten.
+            </p>
+            <p class="price">€ 19,- <span>ipv € 27,-</span></p>
+          </div>
+          <div class="card-footer">
+            <a class="btn-outline" href="mailto:bedrijfsdeurencornald@gmail.com?subject=Complete%20bundel%20templates%20bestellen&body=Hallo,%0A%0AIk wil graag de complete bundel met alle templates bestellen.%0A%0ANaam:%0AOrganisatie:%0A%0AMet vriendelijke groet,%0A">
+              Bestel de bundel
+            </a>
+            <span class="note">Direct na betaling te downloaden.</span>
+          </div>
         </article>
       </div>
     </section>
 
-    <section id="offerte" class="contact">
-      <h2>Offerte aanvragen</h2>
-      <p class="small">Vul je gegevens in en omschrijf kort je situatie. We nemen zo snel mogelijk contact op.</p>
-      <form>
-        <label>Bedrijfsnaam</label>
-        <input type="text" name="company" placeholder="Bedrijfsnaam" />
+    <section id="hoe-werkt-het" class="two-column">
+      <article class="panel">
+        <h3>Hoe werkt het?</h3>
+        <p>We houden het bewust zo simpel mogelijk:</p>
+        <ul>
+          <li>Kies de template(s) die je nodig hebt.</li>
+          <li>Stuur een e-mail via de knop onder het product.</li>
+          <li>Je ontvangt een kort bericht met betaalverzoek (bijv. tikkie of overschrijving).</li>
+          <li>Na betaling ontvang je direct de bestanden (Excel / Sheets / PDF) per mail.</li>
+        </ul>
+        <p>Je mag de templates onbeperkt gebruiken binnen jouw eigen organisatie.</p>
+      </article>
 
-        <label>Naam</label>
-        <input type="text" name="name" placeholder="Naam contactpersoon" />
-
-        <label>E-mail</label>
-        <input type="email" name="email" placeholder="voorbeeld@bedrijf.nl" />
-
-        <label>Telefoonnummer</label>
-        <input type="tel" name="phone" placeholder="06-..." />
-
-        <label>Omschrijf kort wat je zoekt</label>
-        <textarea name="message" rows="4" placeholder="Bijv. 2 sectionaaldeuren voor loods in [plaatsnaam]."></textarea>
-
-        <button type="submit" class="btn-primary">Verstuur aanvraag</button>
-      </form>
-      <p class="small">Formulier werkt nog niet → we koppelen later e-mail of een offerte-systeem.</p>
+      <article class="panel">
+        <h3>Voor wie zijn deze templates?</h3>
+        <ul>
+          <li>Kleine ondernemers die geen tijd hebben voor eigen Excel-bouw.</li>
+          <li>Verenigingen en stichtingen (penningmeesters, voorzitters, vrijwilligerscoördinatoren).</li>
+          <li>Sportclubs met kantine, teams en vrijwilligers.</li>
+          <li>Iedereen die overzicht wil zonder moeilijke software.</li>
+        </ul>
+        <p>Met AI kunnen we snel nieuwe varianten maken. Heb je iets specifieks nodig?
+          Laat het weten, dan denken we mee.</p>
+      </article>
     </section>
 
-    <section id="contact">
-      <h2>Contact</h2>
-      <p class="small">
-        E-mail: <a href="mailto:bedrijfsdeurencornald@gmail.com">bedrijfsdeurencornald@gmail.com</a><br/>
-        Regio: Nederland<br/>
-      </p>
+    <section id="contact" class="two-column">
+      <article class="panel contact-form">
+        <h3>Vraag iets speciaals aan</h3>
+        <p>Op zoek naar een aangepaste template voor jouw situatie? Beschrijf kort wat je zoekt, dan kijken we wat AI kan maken.</p>
+        <form action="mailto:bedrijfsdeurencornald@gmail.com" method="post" enctype="text/plain">
+          <label for="naam">Naam</label>
+          <input id="naam" name="Naam" type="text" placeholder="Je naam" />
+
+          <label for="organisatie">Organisatie / vereniging</label>
+          <input id="organisatie" name="Organisatie" type="text" placeholder="Bijv. Sportclub X of eigen bedrijf" />
+
+          <label for="email">E-mail</label>
+          <input id="email" name="E-mail" type="email" placeholder="jij@voorbeeld.nl" />
+
+          <label for="vraag">Waar ben je naar op zoek?</label>
+          <textarea id="vraag" name="Vraag" placeholder="Beschrijf in 2–5 zinnen welke template of checklist je nodig hebt."></textarea>
+
+          <button type="submit" class="btn-primary">
+            <span class="icon">✉️</span>
+            <span>Verstuur aanvraag</span>
+          </button>
+        </form>
+        <p class="note">Let op: bij sommige mailapps opent er een nieuw bericht met jouw gegevens.</p>
+      </article>
+
+      <article class="panel">
+        <h3>Contact & informatie</h3>
+        <p>Heb je vragen over de templates, betalingen of mogelijkheden?</p>
+        <p>
+          E-mail: <a href="mailto:bedrijfsdeurencornald@gmail.com">bedrijfsdeurencornald@gmail.com</a><br />
+          Regio: Nederland (online levering)
+        </p>
+        <p class="note">
+          Deze website verkoopt alleen algemene templates en doet geen zaken rond bedrijfsdeuren of montage.
+        </p>
+      </article>
     </section>
   </main>
 
   <footer>
-    © <span id="jaar"></span> Kerkhoff Bedrijfsdeuren – Alle rechten voorbehouden.
+    © <span id="jaar"></span> Slimme Templates – Digitale sjablonen voor MKB & verenigingen.
   </footer>
 
   <script>
