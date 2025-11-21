@@ -2,23 +2,22 @@
 <html lang="nl">
 <head>
   <meta charset="UTF-8" />
-  <title>Slimme Templates voor MKB & Verenigingen</title>
+  <title>Slimme Templates – Webshop</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Direct downloadbare templates en checklists voor kleine bedrijven, verenigingen en clubs. Bespaar tijd met kant-en-klare formulieren en Excel-sjablonen." />
+  <meta name="description" content="Webshop met kant-en-klare templates en Excel-sjablonen voor kleine bedrijven, verenigingen en clubs. Voeg toe aan winkelmand, kies pakket en bestel online.">
   <style>
     :root {
-      --bg: #0f172a;
+      --bg: #020617;
       --accent: #22c55e;
-      --accent-soft: rgba(34,197,94,0.1);
-      --text-main: #0f172a;
+      --accent-soft: rgba(34,197,94,0.12);
+      --accent-strong: #16a34a;
+      --text-main: #020617;
       --text-soft: #6b7280;
       --border-soft: #e5e7eb;
       --card-bg: #ffffff;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -28,24 +27,21 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+    a { color: inherit; text-decoration: none; }
 
     header {
       background: var(--bg);
-      color: #ffffff;
-      padding: 0.9rem 1.5rem;
+      color: #e5e7eb;
+      padding: 0.8rem 1.3rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
       position: sticky;
       top: 0;
-      z-index: 10;
+      z-index: 20;
     }
 
-    header .brand {
+    .brand {
       display: flex;
       align-items: center;
       gap: 0.5rem;
@@ -55,22 +51,24 @@
       width: 32px;
       height: 32px;
       border-radius: 999px;
-      background: radial-gradient(circle at 30% 30%, #22c55e, #16a34a 50%, #064e3b);
+      background: radial-gradient(circle at 30% 30%, #22c55e, #16a34a 55%, #064e3b);
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 800;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
+      color: #ecfdf5;
     }
 
     header h1 {
       margin: 0;
       font-size: 1rem;
-      letter-spacing: 0.03em;
+      letter-spacing: 0.04em;
     }
 
     nav {
       display: flex;
+      align-items: center;
       gap: 0.75rem;
       font-size: 0.9rem;
     }
@@ -86,6 +84,29 @@
       background: rgba(15,23,42,0.6);
     }
 
+    .cart-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(15,23,42,0.85);
+      border-radius: 999px;
+      padding: 0.35rem 0.9rem;
+      border: 1px solid rgba(148,163,184,0.6);
+      cursor: pointer;
+      font-size: 0.85rem;
+    }
+
+    .cart-badge {
+      background: #f97316;
+      color: #111827;
+      border-radius: 999px;
+      padding: 0.08rem 0.45rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      min-width: 20px;
+      text-align: center;
+    }
+
     main {
       padding: 1.5rem 1rem 3rem;
       max-width: 1120px;
@@ -93,53 +114,52 @@
     }
 
     .hero {
-      background: radial-gradient(circle at top left, rgba(34,197,94,0.12), transparent 55%),
-                  radial-gradient(circle at bottom right, rgba(59,130,246,0.12), transparent 55%),
-                  #0b1220;
+      background: radial-gradient(circle at top left, rgba(34,197,94,0.16), transparent 55%),
+                  radial-gradient(circle at bottom right, rgba(59,130,246,0.16), transparent 55%),
+                  #020617;
       color: #e5e7eb;
       border-radius: 1.5rem;
-      padding: 1.75rem 1.5rem;
-      margin-bottom: 1.75rem;
+      padding: 1.7rem 1.4rem;
+      margin-bottom: 1.8rem;
       position: relative;
       overflow: hidden;
-    }
-
-    .hero h2 {
-      margin: 0;
-      font-size: 1.6rem;
-    }
-
-    .hero p {
-      margin: 0.6rem 0;
-      font-size: 0.95rem;
-      max-width: 540px;
     }
 
     .hero-highlight {
       display: inline-flex;
       align-items: center;
       gap: 0.4rem;
-      padding: 0.18rem 0.7rem;
+      padding: 0.2rem 0.75rem;
       border-radius: 999px;
-      border: 1px solid rgba(148,163,184,0.4);
-      font-size: 0.75rem;
-      color: #cbd5f5;
+      border: 1px solid rgba(148,163,184,0.5);
+      font-size: 0.78rem;
       background: rgba(15,23,42,0.7);
     }
 
     .hero-highlight span.icon {
-      padding: 0.15rem 0.33rem;
+      padding: 0.15rem 0.35rem;
       border-radius: 999px;
-      background: rgba(34,197,94,0.15);
-      font-size: 0.8rem;
+      background: rgba(34,197,94,0.2);
+    }
+
+    .hero h2 {
+      margin: 0.65rem 0 0.3rem;
+      font-size: 1.6rem;
+    }
+
+    .hero p {
+      margin: 0.2rem 0 0.8rem;
+      font-size: 0.95rem;
+      max-width: 540px;
+      color: #cbd5f5;
     }
 
     .hero-actions {
-      margin-top: 1rem;
       display: flex;
       flex-wrap: wrap;
-      gap: 0.75rem;
+      gap: 0.8rem;
       align-items: center;
+      margin-top: 0.4rem;
     }
 
     .btn-primary {
@@ -147,13 +167,13 @@
       align-items: center;
       justify-content: center;
       gap: 0.4rem;
-      padding: 0.7rem 1.4rem;
+      padding: 0.7rem 1.3rem;
       border-radius: 999px;
       border: none;
-      background: linear-gradient(135deg,#22c55e,#16a34a);
+      background: linear-gradient(135deg, var(--accent), var(--accent-strong));
       color: #ffffff;
       font-weight: 600;
-      font-size: 0.95rem;
+      font-size: 0.94rem;
       cursor: pointer;
       text-decoration: none;
     }
@@ -163,12 +183,8 @@
     }
 
     .hero-meta {
-      font-size: 0.75rem;
+      font-size: 0.78rem;
       color: #9ca3af;
-    }
-
-    .products {
-      margin-bottom: 2rem;
     }
 
     .section-label {
@@ -183,8 +199,8 @@
     .section-header {
       display: flex;
       justify-content: space-between;
-      align-items: baseline;
       gap: 1rem;
+      align-items: baseline;
       margin-bottom: 1rem;
     }
 
@@ -195,14 +211,15 @@
 
     .section-header p {
       margin: 0;
-      font-size: 0.9rem;
+      font-size: 0.87rem;
       color: var(--text-soft);
     }
 
     .product-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(230px,1fr));
+      grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
       gap: 1rem;
+      margin-bottom: 2rem;
     }
 
     .card {
@@ -214,36 +231,36 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      min-height: 210px;
+      min-height: 220px;
     }
 
     .card-badge {
       display: inline-flex;
       align-items: center;
-      gap: 0.35rem;
-      padding: 0.18rem 0.5rem;
+      gap: 0.3rem;
+      padding: 0.18rem 0.55rem;
       border-radius: 999px;
-      font-size: 0.7rem;
+      font-size: 0.72rem;
       background: var(--accent-soft);
       color: #166534;
       margin-bottom: 0.5rem;
     }
 
     .card h4 {
-      margin: 0 0 0.4rem;
+      margin: 0 0 0.3rem;
       font-size: 1rem;
     }
 
     .card p {
-      margin: 0 0 0.4rem;
-      font-size: 0.88rem;
+      margin: 0 0 0.5rem;
+      font-size: 0.87rem;
       color: var(--text-soft);
     }
 
     .price {
       font-weight: 700;
-      margin-top: 0.4rem;
-      font-size: 0.95rem;
+      font-size: 0.96rem;
+      margin: 0.3rem 0 0.4rem;
     }
 
     .price span {
@@ -252,23 +269,46 @@
       color: var(--text-soft);
     }
 
+    .variant-select-wrapper {
+      margin-bottom: 0.5rem;
+    }
+
+    .variant-select-label {
+      font-size: 0.78rem;
+      margin-bottom: 0.2rem;
+      color: var(--text-soft);
+      font-weight: 500;
+    }
+
+    select {
+      width: 100%;
+      padding: 0.5rem 0.6rem;
+      border-radius: 0.6rem;
+      border: 1px solid #d1d5db;
+      font-size: 0.9rem;
+      font-family: inherit;
+    }
+
     .card-footer {
       margin-top: 0.7rem;
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 0.5rem;
       flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
+      justify-content: space-between;
     }
 
     .btn-outline {
-      padding: 0.45rem 0.9rem;
+      padding: 0.5rem 0.9rem;
       border-radius: 999px;
       border: 1px solid var(--border-soft);
       font-size: 0.85rem;
       background: #f9fafb;
       cursor: pointer;
       text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
     }
 
     .btn-outline:hover {
@@ -281,11 +321,11 @@
       color: var(--text-soft);
     }
 
-    .two-column {
+    .layout {
       display: grid;
-      grid-template-columns: minmax(0,1.4fr) minmax(0,1fr);
+      grid-template-columns: minmax(0,1.6fr) minmax(0,1fr);
       gap: 1rem;
-      margin-bottom: 2rem;
+      align-items: flex-start;
     }
 
     .panel {
@@ -303,42 +343,92 @@
 
     .panel p {
       margin: 0.25rem 0;
-      font-size: 0.88rem;
+      font-size: 0.87rem;
       color: var(--text-soft);
     }
 
-    ul {
-      padding-left: 1.2rem;
-      margin: 0.4rem 0;
-      font-size: 0.88rem;
-      color: var(--text-soft);
+    .cart-items {
+      border-top: 1px solid #e5e7eb;
+      margin-top: 0.6rem;
+      padding-top: 0.6rem;
+      max-height: 260px;
+      overflow-y: auto;
     }
 
-    li + li {
-      margin-top: 0.25rem;
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      padding: 0.35rem 0;
+      border-bottom: 1px dashed #e5e7eb;
     }
 
-    .contact-form label {
-      display: block;
-      font-size: 0.8rem;
-      margin-bottom: 0.25rem;
+    .cart-item:last-child {
+      border-bottom: none;
+    }
+
+    .cart-item-title {
       font-weight: 500;
     }
 
-    .contact-form input,
-    .contact-form textarea {
+    .cart-item-variant {
+      color: var(--text-soft);
+      font-size: 0.78rem;
+    }
+
+    .cart-item-actions {
+      text-align: right;
+    }
+
+    .cart-remove {
+      border: none;
+      background: transparent;
+      color: #ef4444;
+      font-size: 0.75rem;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .cart-summary {
+      margin-top: 0.8rem;
+      font-size: 0.9rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .cart-summary strong {
+      font-size: 1rem;
+    }
+
+    .notice {
+      font-size: 0.78rem;
+      color: var(--text-soft);
+      margin-top: 0.5rem;
+    }
+
+    .account-form label {
+      display: block;
+      font-size: 0.8rem;
+      margin-bottom: 0.2rem;
+      font-weight: 500;
+    }
+
+    .account-form input {
       width: 100%;
-      padding: 0.55rem 0.6rem;
+      padding: 0.5rem 0.6rem;
       border-radius: 0.6rem;
       border: 1px solid #d1d5db;
       font-size: 0.9rem;
-      margin-bottom: 0.7rem;
+      margin-bottom: 0.5rem;
       font-family: inherit;
     }
 
-    .contact-form textarea {
-      resize: vertical;
-      min-height: 90px;
+    .account-hint {
+      font-size: 0.78rem;
+      color: var(--text-soft);
+      margin-bottom: 0.6rem;
     }
 
     footer {
@@ -351,32 +441,21 @@
     footer a {
       text-decoration: underline;
       text-decoration-thickness: 1px;
-      text-underline-offset: 3px;
+      text-underline-offset: 2px;
     }
 
-    @media (max-width: 720px) {
-      header {
-        padding-inline: 1rem;
-      }
-      .hero {
-        padding: 1.4rem 1.1rem;
-        border-radius: 1.2rem;
-      }
-      .hero h2 {
-        font-size: 1.35rem;
-      }
-      nav {
-        display: none;
-      }
-      main {
-        padding-inline: 1rem;
-      }
-      .two-column {
-        grid-template-columns: minmax(0,1fr);
-      }
-      .product-grid {
-        grid-template-columns: minmax(0,1fr);
-      }
+    @media (max-width: 820px) {
+      nav { display: none; }
+      header { padding-inline: 1rem; }
+      main { padding-inline: 1rem; }
+      .hero { padding-inline: 1.1rem; border-radius: 1.2rem; }
+      .hero h2 { font-size: 1.35rem; }
+      .layout { grid-template-columns: minmax(0,1fr); }
+    }
+
+    @media (max-width: 480px) {
+      .hero-actions { flex-direction: column; align-items: flex-start; }
+      .cart-button { padding: 0.35rem 0.7rem; }
     }
   </style>
 </head>
@@ -390,184 +469,264 @@
     </div>
     <nav>
       <a href="#producten">Templates</a>
-      <a href="#hoe-werkt-het">Hoe het werkt</a>
-      <a href="#contact">Contact</a>
+      <a href="#account">Mijn account</a>
+      <button class="cart-button" type="button" onclick="scrollToCart()">
+        🧺 Winkelmand
+        <span class="cart-badge" id="cart-count">0</span>
+      </button>
     </nav>
+    <button class="cart-button" type="button" onclick="scrollToCart()" style="display:none;" id="cart-button-mobile">
+      🧺 <span class="cart-badge" id="cart-count-mobile">0</span>
+    </button>
   </header>
 
   <main>
     <section class="hero">
       <div class="hero-highlight">
         <span class="icon">⚡</span>
-        <span>Speciaal voor kleine bedrijven, verenigingen en clubs</span>
+        <span>Online bestellen – digitale templates direct na betaling</span>
       </div>
-      <h2>Direct kant-en-klare templates. Minder administratie. Meer tijd voor de echte dingen.</h2>
+      <h2>Stel je eigen pakket samen met slimme templates voor jouw organisatie.</h2>
       <p>
-        Handige Excel- en PDF-sjablonen voor bestuur, administratie en organisatie. Geen ingewikkelde software,
-        gewoon downloaden en gebruiken. Ideaal voor kleine ondernemers, penningmeesters, teamleiders en voorzitters.
+        Kies per document hoe uitgebreid je het wilt: Basis, Plus of Pro. Voeg alles toe aan je winkelmand,
+        vul je gegevens in en ontvang na betaling de bestanden per e-mail.
       </p>
       <div class="hero-actions">
         <a href="#producten" class="btn-primary">
-          <span class="icon">⬇</span>
-          <span>Bekijk de templates</span>
+          <span class="icon">📦</span>
+          <span>Start met samenstellen</span>
         </a>
-        <span class="hero-meta">Eenmalig betalen, onbeperkt gebruiken binnen jouw organisatie.</span>
+        <span class="hero-meta">Geen abonnement. Gewoon eenmalig betalen per template of bundel.</span>
       </div>
     </section>
 
-    <section id="producten" class="products">
-      <div class="section-label">Templates</div>
+    <section id="producten">
+      <div class="section-label">Shop</div>
       <div class="section-header">
-        <h3>Populaire kant-en-klare sjablonen</h3>
-        <p>Kies een losse template of ga voor het complete bundelpakket met korting.</p>
+        <h3>Templates met uitbreidingsopties</h3>
+        <p>Kies per template het pakket dat bij jouw organisatie past. De prijs past zich automatisch aan.</p>
       </div>
 
-      <div class="product-grid">
-        <article class="card">
-          <div>
-            <div class="card-badge">Excel / Google Sheets</div>
-            <h4>Onkosten & Declaratie Template</h4>
-            <p>
-              Eenvoudige, duidelijke sheet voor medewerkers, vrijwilligers of leden om onkosten in te dienen.
-              Inclusief datum, omschrijving, categorie en goedkeuring.
-            </p>
-            <p class="price">€ 9,- <span>eenmalig</span></p>
-          </div>
-          <div class="card-footer">
-            <a class="btn-outline" href="mailto:bedrijfsdeurencornald@gmail.com?subject=Onkosten%20template%20bestellen&body=Hallo,%0A%0AIk wil graag de Onkosten%20%26%20Declaratie%20Template bestellen.%0A%0ANaam:%0AOrganisatie:%0A%0AMet vriendelijke groet,%0A">
-              Bestel per e-mail
-            </a>
-            <span class="note">Je ontvangt betaalinstructies + downloadlink.</span>
-          </div>
-        </article>
-
-        <article class="card">
-          <div>
-            <div class="card-badge">Excel / Google Sheets</div>
-            <h4>Vrijwilligers & Dienstenrooster</h4>
-            <p>
-              Rooster voor diensten, bardiensten, trainingen of teams. In één oogopslag duidelijk wie wanneer ingepland staat.
-              Ideaal voor sportclubs, verenigingen en kleine bedrijven.
-            </p>
-            <p class="price">€ 9,- <span>eenmalig</span></p>
-          </div>
-          <div class="card-footer">
-            <a class="btn-outline" href="mailto:bedrijfsdeurencornald@gmail.com?subject=Rooster%20template%20bestellen&body=Hallo,%0A%0AIk wil graag de Vrijwilligers%20%26%20Dienstenrooster%20Template bestellen.%0A%0ANaam:%0AOrganisatie:%0A%0AMet vriendelijke groet,%0A">
-              Bestel per e-mail
-            </a>
-            <span class="note">Te gebruiken in Excel of Google Sheets.</span>
-          </div>
-        </article>
-
-        <article class="card">
-          <div>
-            <div class="card-badge">Excel / PDF</div>
-            <h4>Kleine Kas & Contante Kassa</h4>
-            <p>
-              Hou eenvoudig bij wat er in en uit de kas gaat. Perfect voor kantines, acties, evenementen en
-              kleine organisaties die met contant geld werken.
-            </p>
-            <p class="price">€ 9,- <span>eenmalig</span></p>
-          </div>
-          <div class="card-footer">
-            <a class="btn-outline" href="mailto:bedrijfsdeurencornald@gmail.com?subject=Kleine%20Kas%20template%20bestellen&body=Hallo,%0A%0AIk wil graag de Kleine%20Kas%20%26%20Contante%20Kassa%20Template bestellen.%0A%0ANaam:%0AOrganisatie:%0A%0AMet vriendelijke groet,%0A">
-              Bestel per e-mail
-            </a>
-            <span class="note">Inclusief korte instructie.</span>
-          </div>
-        </article>
-
-        <article class="card">
-          <div>
-            <div class="card-badge">Meest gekozen</div>
-            <h4>Complete Bundel (alle templates)</h4>
-            <p>
-              Alle drie de templates in één pakket tegen gereduceerd tarief. Ideaal als je in één keer
-              je administratie en organisatie strak wilt neerzetten.
-            </p>
-            <p class="price">€ 19,- <span>ipv € 27,-</span></p>
-          </div>
-          <div class="card-footer">
-            <a class="btn-outline" href="mailto:bedrijfsdeurencornald@gmail.com?subject=Complete%20bundel%20templates%20bestellen&body=Hallo,%0A%0AIk wil graag de complete bundel met alle templates bestellen.%0A%0ANaam:%0AOrganisatie:%0A%0AMet vriendelijke groet,%0A">
-              Bestel de bundel
-            </a>
-            <span class="note">Direct na betaling te downloaden.</span>
-          </div>
-        </article>
+      <div class="product-grid" id="product-grid">
+        <!-- Productkaarten worden door JavaScript ingevuld -->
       </div>
     </section>
 
-    <section id="hoe-werkt-het" class="two-column">
+    <section class="layout" id="cart-section">
       <article class="panel">
-        <h3>Hoe werkt het?</h3>
-        <p>We houden het bewust zo simpel mogelijk:</p>
-        <ul>
-          <li>Kies de template(s) die je nodig hebt.</li>
-          <li>Stuur een e-mail via de knop onder het product.</li>
-          <li>Je ontvangt een kort bericht met betaalverzoek (bijv. tikkie of overschrijving).</li>
-          <li>Na betaling ontvang je direct de bestanden (Excel / Sheets / PDF) per mail.</li>
-        </ul>
-        <p>Je mag de templates onbeperkt gebruiken binnen jouw eigen organisatie.</p>
+        <h3>🧺 Winkelmand</h3>
+        <p class="notice">
+          Hier zie je alle templates die je hebt toegevoegd. Je kunt nog aanpassen of verwijderen voordat je bestelt.
+        </p>
+        <div id="cart-items" class="cart-items">
+          <!-- Winkelmand-items komen hier -->
+        </div>
+        <div class="cart-summary">
+          <div>
+            Totaal (incl. btw, digitale levering):<br>
+            <strong id="cart-total">€ 0,-</strong>
+          </div>
+          <button class="btn-primary" type="button" onclick="checkout()">
+            <span class="icon">✅</span>
+            <span>Bestelling afronden</span>
+          </button>
+        </div>
+        <p class="notice">
+          Bij het afronden wordt een e-mailbericht geopend met jouw bestelling en gegevens. Je ontvangt daarna betaalinstructies.
+        </p>
       </article>
 
-      <article class="panel">
-        <h3>Voor wie zijn deze templates?</h3>
-        <ul>
-          <li>Kleine ondernemers die geen tijd hebben voor eigen Excel-bouw.</li>
-          <li>Verenigingen en stichtingen (penningmeesters, voorzitters, vrijwilligerscoördinatoren).</li>
-          <li>Sportclubs met kantine, teams en vrijwilligers.</li>
-          <li>Iedereen die overzicht wil zonder moeilijke software.</li>
-        </ul>
-        <p>Met AI kunnen we snel nieuwe varianten maken. Heb je iets specifieks nodig?
-          Laat het weten, dan denken we mee.</p>
-      </article>
-    </section>
+      <article class="panel" id="account">
+        <h3>👤 Mijn gegevens</h3>
+        <p class="account-hint">
+          Vul je gegevens één keer in. We gebruiken deze bij het afronden van je bestelling. Je gegevens worden alleen
+          lokaal in je browser opgeslagen voor de volgende keer.
+        </p>
+        <form class="account-form" onsubmit="event.preventDefault(); saveAccount();">
+          <label for="acc-name">Naam</label>
+          <input id="acc-name" type="text" placeholder="Je naam" />
 
-    <section id="contact" class="two-column">
-      <article class="panel contact-form">
-        <h3>Vraag iets speciaals aan</h3>
-        <p>Op zoek naar een aangepaste template voor jouw situatie? Beschrijf kort wat je zoekt, dan kijken we wat AI kan maken.</p>
-        <form action="mailto:bedrijfsdeurencornald@gmail.com" method="post" enctype="text/plain">
-          <label for="naam">Naam</label>
-          <input id="naam" name="Naam" type="text" placeholder="Je naam" />
+          <label for="acc-org">Organisatie / vereniging</label>
+          <input id="acc-org" type="text" placeholder="Bijv. Sportclub X, eigen bedrijf, stichting..." />
 
-          <label for="organisatie">Organisatie / vereniging</label>
-          <input id="organisatie" name="Organisatie" type="text" placeholder="Bijv. Sportclub X of eigen bedrijf" />
+          <label for="acc-email">E-mail</label>
+          <input id="acc-email" type="email" placeholder="jij@voorbeeld.nl" />
 
-          <label for="email">E-mail</label>
-          <input id="email" name="E-mail" type="email" placeholder="jij@voorbeeld.nl" />
+          <label for="acc-notes">Bijzonderheden (optioneel)</label>
+          <input id="acc-notes" type="text" placeholder="Bijv. voorkeur voor Excel / Google Sheets" />
 
-          <label for="vraag">Waar ben je naar op zoek?</label>
-          <textarea id="vraag" name="Vraag" placeholder="Beschrijf in 2–5 zinnen welke template of checklist je nodig hebt."></textarea>
-
-          <button type="submit" class="btn-primary">
-            <span class="icon">✉️</span>
-            <span>Verstuur aanvraag</span>
+          <button type="submit" class="btn-outline">
+            💾 Gegevens opslaan in deze browser
           </button>
         </form>
-        <p class="note">Let op: bij sommige mailapps opent er een nieuw bericht met jouw gegevens.</p>
-      </article>
-
-      <article class="panel">
-        <h3>Contact & informatie</h3>
-        <p>Heb je vragen over de templates, betalingen of mogelijkheden?</p>
-        <p>
-          E-mail: <a href="mailto:bedrijfsdeurencornald@gmail.com">bedrijfsdeurencornald@gmail.com</a><br />
-          Regio: Nederland (online levering)
-        </p>
-        <p class="note">
-          Deze website verkoopt alleen algemene templates en doet geen zaken rond bedrijfsdeuren of montage.
-        </p>
       </article>
     </section>
   </main>
 
   <footer>
-    © <span id="jaar"></span> Slimme Templates – Digitale sjablonen voor MKB & verenigingen.
+    © <span id="jaar"></span> Slimme Templates – Digitale sjablonen voor MKB & verenigingen.  
+    <br>Betaling en levering volgen handmatig na bestelling. Later kan dit uitgebreid worden met automatische betalingen.
   </footer>
 
   <script>
-    document.getElementById("jaar").textContent = new Date().getFullYear();
-  </script>
-</body>
-</html>
+    // ------------------------
+    // Basis data: producten & varianten
+    // ------------------------
+    const PRODUCTS = [
+      {
+        id: 'onkosten',
+        name: 'Onkosten & Declaratie Template',
+        badge: 'Excel / Google Sheets',
+        description: 'Handig formulier voor medewerkers, vrijwilligers of leden om onkosten simpel en netjes in te dienen.',
+        basePrice: 9,
+        variants: [
+          { id: 'basic', label: 'Basis – voor 1 team/afdeling', price: 9 },
+          { id: 'plus', label: 'Plus – meerdere teams + extra categorieën', price: 15 },
+          { id: 'pro', label: 'Pro – inclusief goedkeurings- en overzichtstabblad', price: 25 },
+        ]
+      },
+      {
+        id: 'rooster',
+        name: 'Vrijwilligers & Dienstenrooster',
+        badge: 'Excel / Google Sheets',
+        description: 'Duidelijk rooster voor bardiensten, trainingen, diensten of shifts. In één oogopslag overzicht.',
+        basePrice: 9,
+        variants: [
+          { id: 'basic', label: 'Basis – 1 rooster met 1 tabblad', price: 9 },
+          { id: 'plus', label: 'Plus – meerdere roosters (bijv. bar + wedstrijden)', price: 17 },
+          { id: 'pro', label: 'Pro – inclusief automatisch overzicht per persoon', price: 27 },
+        ]
+      },
+      {
+        id: 'kas',
+        name: 'Kleine Kas & Contante Kassa',
+        badge: 'Excel / PDF',
+        description: 'Eenvoudige kasregistratie voor kantines, acties, evenementen en kleine organisaties.',
+        basePrice: 9,
+        variants: [
+          { id: 'basic', label: 'Basis – eenvoudige in/uit-registratie', price: 9 },
+          { id: 'plus', label: 'Plus – meerdere kassen + samenvattingssheet', price: 17 },
+          { id: 'pro', label: 'Pro – inclusief kasverschilberekening & logboek', price: 29 },
+        ]
+      },
+      {
+        id: 'bundel',
+        name: 'Complete Bundel (alle templates)',
+        badge: 'Meest gekozen',
+        description: 'Alle templates (onkosten, rooster, kas) in één pakket, in de variant naar keuze.',
+        basePrice: 19,
+        variants: [
+          { id: 'basic', label: 'Basis bundel – alle Basis-varianten', price: 19 },
+          { id: 'plus', label: 'Plus bundel – alle Plus-varianten', price: 35 },
+          { id: 'pro', label: 'Pro bundel – alle Pro-varianten', price: 55 },
+        ]
+      },
+    ];
+
+    let cart = [];
+
+    function formatPrice(value) {
+      return '€ ' + value.toFixed(0).replace('.', ',') + ',-';
+    }
+
+    // ------------------------
+    // Product rendering
+    // ------------------------
+    function renderProducts() {
+      const container = document.getElementById('product-grid');
+      container.innerHTML = '';
+
+      PRODUCTS.forEach(product => {
+        const card = document.createElement('article');
+        card.className = 'card';
+
+        const badge = document.createElement('div');
+        badge.className = 'card-badge';
+        badge.textContent = product.badge;
+
+        const title = document.createElement('h4');
+        title.textContent = product.name;
+
+        const desc = document.createElement('p');
+        desc.textContent = product.description;
+
+        const priceEl = document.createElement('p');
+        priceEl.className = 'price';
+        priceEl.textContent = formatPrice(product.basePrice) + ' ';
+        const span = document.createElement('span');
+        span.textContent = '(verstuurde bestanden digitaal)';
+        priceEl.appendChild(span);
+
+        const variantWrapper = document.createElement('div');
+        variantWrapper.className = 'variant-select-wrapper';
+
+        const label = document.createElement('div');
+        label.className = 'variant-select-label';
+        label.textContent = 'Kies pakket-niveau:';
+        const select = document.createElement('select');
+        select.id = `variant-${product.id}`;
+        product.variants.forEach(variant => {
+          const opt = document.createElement('option');
+          opt.value = variant.id;
+          opt.textContent = `${variant.label} – ${formatPrice(variant.price)}`;
+          select.appendChild(opt);
+        });
+
+        variantWrapper.appendChild(label);
+        variantWrapper.appendChild(select);
+
+        const footer = document.createElement('div');
+        footer.className = 'card-footer';
+
+        const btnAdd = document.createElement('button');
+        btnAdd.type = 'button';
+        btnAdd.className = 'btn-outline';
+        btnAdd.innerHTML = '➕ Toevoegen aan winkelmand';
+        btnAdd.addEventListener('click', () => addToCart(product.id));
+
+        const note = document.createElement('span');
+        note.className = 'note';
+        note.textContent = 'Digitale levering na betaling.';
+
+        footer.appendChild(btnAdd);
+        footer.appendChild(note);
+
+        card.appendChild(badge);
+        card.appendChild(title);
+        card.appendChild(desc);
+        card.appendChild(priceEl);
+        card.appendChild(variantWrapper);
+        card.appendChild(footer);
+
+        container.appendChild(card);
+      });
+    }
+
+    // ------------------------
+    // Cart logic
+    // ------------------------
+    function addToCart(productId) {
+      const product = PRODUCTS.find(p => p.id === productId);
+      if (!product) return;
+
+      const select = document.getElementById(`variant-${product.id}`);
+      const variantId = select ? select.value : product.variants[0].id;
+      const variant = product.variants.find(v => v.id === variantId);
+
+      const existing = cart.find(
+        item => item.productId === product.id && item.variantId === variant.id
+      );
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({
+          productId: product.id,
+          name: product.name,
+          variantId: variant.id,
+          variantLabel: variant.label,
+          price: variant.price,
+          qty: 1
+        });
+      }
+
+      saveCart(
