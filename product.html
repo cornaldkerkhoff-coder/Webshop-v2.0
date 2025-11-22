@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product – Slimme Templates</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #020617;
+      --bg-soft: #0b1120;
+      --accent: #ff8a3c;
+      --accent2: #38bdf8;
+      --text: #f9fafb;
+      --muted: #9ca3af;
+      --border: #1f2937;
+      --radius-lg: 20px;
+      --radius-pill: 999px;
+      --shadow: 0 18px 45px rgba(0, 0, 0, 0.6);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: radial-gradient(circle at top, #0b1020 0, #020617 55%, #000 100%);
+      color: var(--text);
+      min-height: 100vh;
+    }
+    a { color: inherit; text-decoration: none; }
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 18px 16px 40px;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 10px 16px;
+      border-radius: var(--radius-pill);
+      background: rgba(15, 23, 42, 0.92);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      box-shadow: 0 14px 40px rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(18px);
+      position: sticky;
+      top: 10px;
+      z-index: 20;
+    }
+    .brand { display: flex; align-items: center; gap: 10px; }
+    .brand-logo {
+      width: 32px; height: 32px; border-radius: 12px;
+      background: radial-gradient(circle at 30% 20%, #a7f3d0 0, #22c55e 35%, #16a34a 70%, #065f46 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; color: #022c22; font-size: 16px;
+    }
+    .brand-main { font-weight: 700; letter-spacing: 0.02em; }
+    .brand-sub { font-size: 11px; color: var(--muted); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 14px;
+    }
+    .nav-link { color: var(--muted); padding: 6px 0; }
+    .nav-link:hover { color: #e5e7eb; }
+    .nav-link.active { color: #f9fafb; font-weight: 600; }
+
+    @media (max-width: 720px) {
+      .navbar { flex-wrap: wrap; align-items: flex-start; }
+      .nav-links { flex-wrap: wrap; justify-content: center; order: 3; width: 100%; }
+    }
+
+    /* LAYOUT */
+    .layout {
+      margin-top: 28px;
+      display: grid;
+      grid-template-columns: minmax(0, 2.2fr) minmax(0, 2.4fr);
+      gap: 20px;
+    }
+    @media (max-width: 900px) {
+      .layout { grid-template-columns: minmax(0,1fr); }
+    }
+
+    .card {
+      border-radius: 22px;
+      border: 1px solid rgba(75,85,99,0.9);
+      background: linear-gradient(145deg, #020617, #020617);
+      box-shadow: var(--shadow);
+      padding: 18px 18px 16px;
+    }
+    h1 { font-size: 24px; margin: 0 0 6px; }
+    .product-tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      font-size: 11px;
+      margin-bottom: 8px;
+    }
+    .pill {
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.4);
+      background: rgba(15,23,42,0.95);
+      color: #e5e7eb;
+    }
+    .price {
+      font-weight: 600;
+      font-size: 18px;
+      margin-top: 4px;
+    }
+    .price span { display: block; font-size: 12px; color: var(--muted); font-weight: 400; }
+    .lead {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+    ul.features {
+      margin: 0 0 10px;
+      padding-left: 18px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .section-title {
+      font-size: 15px;
+      margin: 0 0 8px;
+    }
+    .hint { font-size: 11px; color: var(--muted); margin-bottom: 10px; }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 10px;
+      font-size: 12px;
+    }
+    @media (max-width: 640px) {
+      .form-grid { grid-template-columns: minmax(0,1fr); }
+    }
+    .field { display: flex; flex-direction: column; gap: 4px; }
+    label { font-size: 12px; color: #e5e7eb; }
+    label span { color: var(--accent2); }
+    input, textarea, select {
+      border-radius: 11px;
+      border: 1px solid rgba(55,65,81,0.9);
+      background: rgba(15,23,42,0.96);
+      padding: 7px 9px;
+      color: #e5e7eb;
+      font-family: inherit;
+      font-size: 12px;
+      outline: none;
+    }
+    input:focus, textarea:focus, select:focus {
+      border-color: var(--accent2);
+      box-shadow: 0 0 0 1px rgba(56,189,248,0.6);
+    }
+    textarea { resize: vertical; min-height: 70px; }
+
+    .field-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .field-row label {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-weight: 400;
+    }
+    .field-row input[type="checkbox"] {
+      width: auto; height: auto;
+    }
+
+    .btn-primary {
+      border-radius: 999px;
+      padding: 8px 14px;
+      border: none;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #111827;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      box-shadow: 0 12px 35px rgba(56,189,248,0.3);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 10px;
+    }
+    .btn-primary:hover { filter: brightness(1.05); }
+
+    .back-link {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .back-link:hover { color: #e5e7eb; }
+
+    .status {
+      margin-top: 6px;
+      font-size: 11px;
+    }
+    .status.error { color: #f97373; }
+    .status.success { color: #22c55e; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <!-- NAVBAR -->
+    <header class="navbar">
+      <a href="index.html" class="brand">
+        <div class="brand-logo">ST</div>
+        <div>
+          <div class="brand-main">Slimme Templates</div>
+          <div class="brand-sub">Documenten voor kleine bedrijven & ZZP’ers</div>
+        </div>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="index.html#producten" class="nav-link active">Producten</a>
+        <a href="Info.html" class="nav-link">Hoe het werkt</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+    </header>
+
+    <a href="index.html#producten" class="back-link">← Terug naar overzicht</a>
+
+    <main class="layout">
+      <!-- LINKERKAART: PRODUCTINFO -->
+      <section class="card">
+        <h1 id="product-name">Productnaam</h1>
+        <div class="product-tag-row">
+          <span class="pill" id="product-category">Categorie</span>
+          <span class="pill" id="product-level">Niveau</span>
+          <span class="pill" id="product-format">Excel</span>
+        </div>
+        <div class="price" id="product-price">€ 0,- <span>Incl. btw – éénmalig</span></div>
+        <p class="lead" id="product-description">
+          Beschrijving van het product.
+        </p>
+        <ul class="features" id="product-features">
+          <!-- bullets via JS -->
+        </ul>
+        <p class="hint">
+          Op deze pagina stel je het bestand alvast samen. Na je bestelling ontvang je het template ingesteld met jouw gegevens.
+        </p>
+      </section>
+
+      <!-- RECHTERKAART: CONFIGUREREN -->
+      <section class="card">
+        <h2 class="section-title">Stel je bestand samen</h2>
+        <p class="hint">
+          Vul hieronder je bedrijfsgegevens en voorkeuren in. Dit wordt gebruikt om het template zo veel mogelijk kant-en-klaar te maken.
+        </p>
+
+        <form id="config-form">
+          <h3 class="section-title">1. Bedrijfsgegevens</h3>
+          <div class="form-grid">
+            <div class="field">
+              <label>Bedrijfsnaam <span>*</span></label>
+              <input type="text" name="company" required />
+            </div>
+            <div class="field">
+              <label>Contactpersoon</label>
+              <input type="text" name="contact" />
+            </div>
+            <div class="field">
+              <label>Adres</label>
+              <input type="text" name="address" placeholder="Straat + huisnummer" />
+            </div>
+            <div class="field">
+              <label>Postcode + plaats</label>
+              <input type="text" name="city" />
+            </div>
+            <div class="field">
+              <label>KvK-nummer</label>
+              <input type="text" name="kvk" />
+            </div>
+            <div class="field">
+              <label>BTW-nummer</label>
+              <input type="text" name="btw" />
+            </div>
+            <div class="field">
+              <label>E-mailadres op document</label>
+              <input type="email" name="email" />
+            </div>
+            <div class="field">
+              <label>Telefoonnummer</label>
+              <input type="tel" name="phone" />
+            </div>
+          </div>
+
+          <h3 class="section-title" style="margin-top:14px;">2. Documentinstellingen</h3>
+          <div class="form-grid">
+            <div class="field">
+              <label>Valuta</label>
+              <select name="currency">
+                <option value="EUR">Euro (€)</option>
+                <option value="USD">US Dollar ($)</option>
+                <option value="GBP">Britse Pond (£)</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Standaard btw-tarief</label>
+              <select name="btwRate">
+                <option value="21%">21%</option>
+                <option value="9%">9%</option>
+                <option value="0%">0% / verlegd</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Betaaltermijn</label>
+              <select name="paymentTerm">
+                <option value="14 dagen">14 dagen</option>
+                <option value="30 dagen">30 dagen</option>
+                <option value="45 dagen">45 dagen</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Startnummer documenten</label>
+              <input type="text" name="startNumber" placeholder="Bijv. 2025-001" />
+            </div>
+          </div>
+
+          <h3 class="section-title" style="margin-top:14px;">3. Inhoud van het document</h3>
+          <p class="hint">Welke onderdelen wil je terugzien? (voor zover toepasbaar op dit template)</p>
+          <div class="field-row">
+            <label><input type="checkbox" name="sections" value="Materialen" checked /> Materialen</label>
+            <label><input type="checkbox" name="sections" value="Uren" checked /> Uren</label>
+            <label><input type="checkbox" name="sections" value="Reiskosten" /> Reiskosten</label>
+            <label><input type="checkbox" name="sections" value="Korting" /> Korting per regel</label>
+            <label><input type="checkbox" name="sections" value="Subtotaal per hoofdstuk" /> Subtotaal per hoofdstuk</label>
+            <label><input type="checkbox" name="sections" value="BTW per regel" /> BTW per regel</label>
+          </div>
+
+          <h3 class="section-title" style="margin-top:14px;">4. Teksten op het document</h3>
+          <div class="field">
+            <label>Standaard inleidende tekst</label>
+            <textarea name="intro" placeholder="Bijv. Bedankt voor uw aanvraag. In deze offerte vindt u onze voorstellen voor ..."></textarea>
+          </div>
+          <div class="field">
+            <label>Standaard afsluiting</label>
+            <textarea name="outro" placeholder="Bijv. Heeft u vragen, neem gerust contact op. Met vriendelijke groet, ..."></textarea>
+          </div>
+
+          <div class="field" style="margin-top:10px;">
+            <label>Extra opmerkingen / wensen</label>
+            <textarea name="notes" placeholder="Bijv. kolomnamen, specifieke berekeningen, eigen kleuren/logo..."></textarea>
+          </div>
+
+          <button type="submit" class="btn-primary">
+            Bestand samenstellen & naar betalen →
+          </button>
+          <div id="config-status" class="status"></div>
+        </form>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // Productdata
+    const PRODUCTS = [
+      {
+        id: "offerte-basis",
+        name: "Offerte template – Basis",
+        category: "Offertes & projecten",
+        level: "Basis",
+        format: "Excel",
+        price: 19,
+        description: "Eenvoudige maar professionele offerte in Excel. Met je eigen gegevens, logo en duidelijke prijsopbouw.",
+        features: [
+          "Geschikt voor kleine bedrijven en ZZP’ers",
+          "Eén pagina met heldere prijsopbouw",
+          "Ruimte voor omschrijving, prijs en totaalbedrag",
+          "Aanpasbaar aan je eigen huisstijl"
+        ]
+      },
+      {
+        id: "offerte-pro",
+        name: "Offerte & project – Pro",
+        category: "Offertes & projecten",
+        level: "Pro",
+        format: "Excel",
+        price: 49,
+        description: "Uitgebreid template voor offertes én projectbewaking, inclusief marges, materialen, uren en winst.",
+        features: [
+          "Offerteblad gekoppeld aan projectoverzicht",
+          "Materialen + uren + reiskosten + marge",
+          "Geschikt voor meerdere projecten tegelijk",
+          "Rapportage per project / klant"
+        ]
+      },
+      {
+        id: "uren-plus",
+        name: "Urenregistratie & planning",
+        category: "Planning & uren",
+        level: "Plus",
+        format: "Excel",
+        price: 39,
+        description: "Urenregistratie gecombineerd met een eenvoudige planning voor monteurs of kleine teams.",
+        features: [
+          "Uren per medewerker en per project",
+          "Weekplanning met overzicht per dag",
+          "Basisrapportage per maand",
+          "Geschikt tot ±10 medewerkers"
+        ]
+      }
+    ];
+
+    function loadProduct() {
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get("id");
+      const product = PRODUCTS.find(p => p.id === id) || PRODUCTS[0];
+
+      document.title = product.name + " – Slimme Templates";
+      document.getElementById("product-name").textContent = product.name;
+      document.getElementById("product-category").textContent = product.category;
+      document.getElementById("product-level").textContent = product.level;
+      document.getElementById("product-format").textContent = product.format;
+      document.getElementById("product-price").innerHTML = `€ ${product.price},- <span>Incl. btw – éénmalig</span>`;
+      document.getElementById("product-description").textContent = product.description;
+
+      const ul = document.getElementById("product-features");
+      ul.innerHTML = "";
+      product.features.forEach(f => {
+        const li = document.createElement("li");
+        li.textContent = f;
+        ul.appendChild(li);
+      });
+
+      // Form afhandeling
+      const form = document.getElementById("config-form");
+      const statusEl = document.getElementById("config-status");
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        statusEl.className = "status";
+        const data = new FormData(form);
+
+        const sections = data.getAll("sections");
+        const config = {
+          productId: product.id,
+          productName: product.name,
+          price: product.price,
+          company: data.get("company"),
+          contact: data.get("contact"),
+          address: data.get("address"),
+          city: data.get("city"),
+          kvk: data.get("kvk"),
+          btw: data.get("btw"),
+          email: data.get("email"),
+          phone: data.get("phone"),
+          currency: data.get("currency"),
+          btwRate: data.get("btwRate"),
+          paymentTerm: data.get("paymentTerm"),
+          startNumber: data.get("startNumber"),
+          sections,
+          intro: data.get("intro"),
+          outro: data.get("outro"),
+          notes: data.get("notes")
+        };
+
+        if (!config.company) {
+          statusEl.textContent = "Vul minimaal de bedrijfsnaam in.";
+          statusEl.classList.add("error");
+          return;
+        }
+
+        localStorage.setItem("currentOrder", JSON.stringify(config));
+        statusEl.textContent = "Bestand samengesteld. Je gaat nu naar Betalen & afronden...";
+        statusEl.classList.add("success");
+
+        setTimeout(() => {
+          window.location.href = "betalen.html";
+        }, 700);
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", loadProduct);
+  </script>
+</body>
+</html>
