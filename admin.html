@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <title>Productbeheer – Ecomurce</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      background: #f5f5f7;
+      color: #111827;
+    }
+    header {
+      background: #111827;
+      color: #f9fafb;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header a {
+      color: #e5e7eb;
+      text-decoration: none;
+      margin-left: 1rem;
+      font-size: 0.95rem;
+    }
+    header a:hover { color: #ffffff; }
+
+    main {
+      padding: 1.5rem 2rem 3rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    h1 { margin-top: 0; }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+      align-items: center;
+      font-size: 0.9rem;
+    }
+
+    button {
+      border: none;
+      border-radius: 999px;
+      padding: 0.45rem 0.9rem;
+      font-size: 0.9rem;
+      cursor: pointer;
+      background: #111827;
+      color: #f9fafb;
+    }
+    button.secondary {
+      background: #e5e7eb;
+      color: #111827;
+    }
+    button.danger {
+      background: #ef4444;
+    }
+    button:hover {
+      opacity: 0.92;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      background: #ffffff;
+      border-radius: 0.75rem;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
+    }
+    th, td {
+      padding: 0.5rem;
+      border-bottom: 1px solid #e5e7eb;
+      vertical-align: top;
+    }
+    th {
+      background: #f3f4f6;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+    tr:last-child td { border-bottom: none; }
+
+    input[type="text"],
+    input[type="number"],
+    select,
+    textarea {
+      width: 100%;
+      box-sizing: border-box;
+      font-size: 0.8rem;
+      padding: 0.25rem 0.35rem;
+      border-radius: 0.35rem;
+      border: 1px solid #d1d5db;
+      background: #f9fafb;
+    }
+    textarea {
+      min-height: 60px;
+      resize: vertical;
+    }
+
+    .small {
+      font-size: 0.8rem;
+      color: #6b7280;
+      margin-top: 0.25rem;
+    }
+
+    .status-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      margin-right: 4px;
+    }
+    .status-dot.in_stock { background: #22c55e; }
+    .status-dot.low_stock { background: #eab308; }
+    .status-dot.out_of_stock { background: #ef4444; }
+
+    .info-box {
+      font-size: 0.8rem;
+      color: #4b5563;
+      background: #e5e7eb;
+      border-radius: 0.5rem;
+      padding: 0.5rem 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    @media (max-width: 900px) {
+      header { padding: 0.75rem 1rem; }
+      main { padding: 1rem; }
+      table { font-size: 0.8rem; }
+      th:nth-child(4),
+      td:nth-child(4),
+      th:nth-child(7),
+      td:nth-child(7) {
+        display: none; /* long desc & url verbergen op kleine schermen */
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">Ecomurce</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="product.html">Productoverzicht</a>
+      <a href="winkelwagen.html">Winkelwagen</a>
+      <a href="account.html">Account</a>
+      <a href="contact.html">Contact</a>
+      <a href="admin.html">Beheer</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Productbeheer</h1>
+
+    <div class="info-box">
+      Wijzig hier producten. Daarna klik je op <strong>Download JSON</strong> en vervang je op GitHub het bestand
+      <code>products.json</code> met het gedownloade bestand. Zo komen je wijzigingen online.
+    </div>
+
+    <div class="toolbar">
+      <button type="button" id="reload-btn" class="secondary">Herlaad van products.json</button>
+      <button type="button" id="save-local-btn" class="secondary">Opslaan als concept in browser</button>
+      <button type="button" id="load-local-btn" class="secondary">Concept uit browser laden</button>
+      <button type="button" id="add-btn">Nieuw product toevoegen</button>
+      <button type="button" id="download-btn">Download JSON</button>
+      <span id="status" class="small"></span>
+    </div>
+
+    <div style="overflow:auto; max-height: 70vh;">
+      <table>
+        <thead>
+          <tr>
+            <th>Slug</th>
+            <th>Naam</th>
+            <th>Prijs (EUR)</th>
+            <th>Korte beschrijving</th>
+            <th>Categorie</th>
+            <th>Voorraad</th>
+            <th>Afbeelding&nbsp;URL</th>
+          </tr>
+        </thead>
+        <tbody id="products-body">
+          <!-- JS vult dit -->
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <script>
+    let products = [];
+
+    function setStatus(message) {
+      document.getElementById('status').textContent = message || '';
+    }
+
+    function formatNumber(value) {
+      const num = Number(value);
+      return isNaN(num) ? '' : num.toString();
+    }
+
+    function renderTable() {
+      const tbody = document.getElementById('products-body');
+      tbody.innerHTML = '';
+
+      products.forEach((p, index) => {
+        const tr = document.createElement('tr');
+
+        tr.innerHTML = `
+          <td>
+            <input type="text" data-index="${index}" data-field="slug" value="${p.slug || ''}">
+            <div class="small">Unieke URL-naam</div>
+          </td>
+          <td>
+            <input type="text" data-index="${index}" data-field="name" value="${p.name || ''}">
+          </td>
+          <td>
+            <input type="number" step="0.01" min="0" data-index="${index}" data-field="price_retail" value="${p.price_retail != null ? p.price_retail : ''}">
+            <div class="small">${p.price_currency || 'EUR'}</div>
+          </td>
+          <td>
+            <textarea data-index="${index}" data-field="short_description">${p.short_description || ''}</textarea>
+          </td>
+          <td>
+            <input type="text" data-index="${index}" data-field="category" value="${p.category || ''}">
+            <div class="small">
+              <input type="text" data-index="${index}" data-field="subcategory" placeholder="Subcategorie" value="${p.subcategory || ''}">
+            </div>
+          </td>
+          <td>
+            <select data-index="${index}" data-field="stock_status">
+              <option value="in_stock"${p.stock_status === 'in_stock' ? ' selected' : ''}>Op voorraad</option>
+              <option value="low_stock"${p.stock_status === 'low_stock' ? ' selected' : ''}>Beperkt</option>
+              <option value="out_of_stock"${p.stock_status === 'out_of_stock' ? ' selected' : ''}>Niet op voorraad</option>
+            </select>
+            <div class="small">
+              <span class="status-dot ${p.stock_status || 'in_stock'}"></span>
+              <input type="number" min="0" style="width:75px" data-index="${index}" data-field="stock_quantity" value="${p.stock_quantity != null ? p.stock_quantity : ''}"> st.
+            </div>
+          </td>
+          <td>
+            <input type="text" data-index="${index}" data-field="main_image_url" value="${p.main_image_url || ''}">
+            <div class="small">
+              <button type="button" class="danger" data-delete="${index}">Verwijder</button>
+            </div>
+          </td>
+        `;
+
+        tbody.appendChild(tr);
+      });
+
+      tbody.querySelectorAll('input, textarea, select').forEach(el => {
+        el.addEventListener('input', handleChange);
+      });
+
+      tbody.querySelectorAll('button[data-delete]').forEach(btn => {
+        btn.addEventListener('click', e => {
+          const idx = parseInt(e.target.getAttribute('data-delete'), 10);
+          if (confirm('Dit product verwijderen?')) {
+            products.splice(idx, 1);
+            renderTable();
+            setStatus('Product verwijderd (nog niet online opgeslagen).');
+          }
+        });
+      });
+    }
+
+    function handleChange(e) {
+      const index = parseInt(e.target.getAttribute('data-index'), 10);
+      const field = e.target.getAttribute('data-field');
+      let value = e.target.value;
+
+      if (['price_retail', 'stock_quantity'].includes(field)) {
+        value = value === '' ? null : Number(value);
+      }
+
+      products[index][field] = value;
+      setStatus('Wijzigingen nog niet online opgeslagen. Gebruik Download JSON + commit naar GitHub.');
+    }
+
+    async function loadFromServer() {
+      try {
+        const res = await fetch('products.json?_=' + Date.now());
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        products = await res.json();
+        renderTable();
+        setStatus('Producten geladen van products.json.');
+      } catch (err) {
+        console.error(err);
+        setStatus('Kon products.json niet laden. Staat het bestand in de root van je site?');
+      }
+    }
+
+    function saveDraftToLocal() {
+      try {
+        localStorage.setItem('products_admin_draft', JSON.stringify(products));
+        setStatus('Concept lokaal opgeslagen in de browser.');
+      } catch {
+        setStatus('Opslaan als concept mislukt (localStorage fout).');
+      }
+    }
+
+    function loadDraftFromLocal() {
+      try {
+        const draft = localStorage.getItem('products_admin_draft');
+        if (!draft) {
+          setStatus('Geen concept gevonden in browser.');
+          return;
+        }
+        products = JSON.parse(draft);
+        renderTable();
+        setStatus('Concept uit browser geladen.');
+      } catch {
+        setStatus('Kon concept niet laden (localStorage fout).');
+      }
+    }
+
+    function downloadJson() {
+      const blob = new Blob([JSON.stringify(products, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'products.json';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+      setStatus('Bestand products.json gedownload. Vervang hiermee het bestand in GitHub.');
+    }
+
+    function addNewProduct() {
+      const slugBase = 'nieuw-product-' + (products.length + 1);
+      products.push({
+        slug: slugBase,
+        name: 'Nieuw product',
+        short_description: '',
+        long_description: '',
+        category: '',
+        subcategory: '',
+        brand: '',
+        tags: [],
+        price_retail: 0,
+        price_currency: 'EUR',
+        supplier_price: null,
+        supplier_currency: 'EUR',
+        supplier_name: '',
+        supplier_product_url: '',
+        vat_rate: 21.0,
+        stock_status: 'in_stock',
+        stock_quantity: 0,
+        main_image_url: '',
+        extra_image_urls: []
+      });
+      renderTable();
+      setStatus('Nieuw product toegevoegd (nog niet online opgeslagen).');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('reload-btn').addEventListener('click', loadFromServer);
+      document.getElementById('save-local-btn').addEventListener('click', saveDraftToLocal);
+      document.getElementById('load-local-btn').addEventListener('click', loadDraftFromLocal);
+      document.getElementById('download-btn').addEventListener('click', downloadJson);
+      document.getElementById('add-btn').addEventListener('click', addNewProduct);
+      loadFromServer();
+    });
+  </script>
+</body>
+</html>
