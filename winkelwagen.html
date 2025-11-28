@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <title>Winkelwagen – Ecomurce</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      background: #f5f5f7;
+      color: #111827;
+    }
+    header {
+      background: #111827;
+      color: #f9fafb;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header a {
+      color: #e5e7eb;
+      text-decoration: none;
+      margin-left: 1rem;
+      font-size: 0.95rem;
+    }
+    header a:hover { color: #ffffff; }
+
+    main { padding: 1.5rem 2rem 3rem; max-width: 900px; margin: 0 auto; }
+
+    h1 { margin-top: 0; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      background: #ffffff;
+      border-radius: 0.75rem;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
+    }
+    th, td {
+      padding: 0.75rem;
+      font-size: 0.9rem;
+    }
+    th {
+      text-align: left;
+      background: #f3f4f6;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    tr + tr td {
+      border-top: 1px solid #e5e7eb;
+    }
+    td img {
+      width: 50px;
+      height: 50px;
+      object-fit: cover;
+      border-radius: 0.5rem;
+      margin-right: 0.5rem;
+    }
+    .name-cell {
+      display: flex;
+      align-items: center;
+    }
+    input[type="number"] {
+      width: 70px;
+      padding: 0.3rem 0.4rem;
+      border-radius: 0.375rem;
+      border: 1px solid #d1d5db;
+      font-size: 0.9rem;
+    }
+    .text-right { text-align: right; }
+
+    .button-link {
+      background: none;
+      border: none;
+      color: #ef4444;
+      cursor: pointer;
+      font-size: 0.85rem;
+      padding: 0;
+    }
+
+    .cart-summary {
+      margin-top: 1rem;
+      text-align: right;
+      font-size: 0.95rem;
+    }
+    .cart-summary strong {
+      font-size: 1.1rem;
+      display: inline-block;
+      margin-top: 0.25rem;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.6rem 1.2rem;
+      border-radius: 999px;
+      border: none;
+      background: #111827;
+      color: #f9fafb;
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .btn-primary:hover { background: #020617; }
+
+    .empty {
+      margin-top: 1rem;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 768px) {
+      header { padding: 0.75rem 1rem; }
+      main { padding: 1rem; }
+      table { font-size: 0.85rem; }
+      th:nth-child(3), td:nth-child(3) { display: none; } /* verberg prijs per stuk op mobiel om ruimte te besparen */
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">Ecomurce</div>
+    <nav>
+      <a href="Index.html">Home</a>
+      <a href="product.html">Productoverzicht</a>
+      <a href="winkelwagen.html">Winkelwagen</a>
+      <a href="account.html">Account</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Winkelwagen</h1>
+    <div id="cart-container"></div>
+  </main>
+
+  <script>
+    function loadCart() {
+      try {
+        return JSON.parse(localStorage.getItem('cart') || '[]');
+      } catch {
+        return [];
+      }
+    }
+
+    function saveCart(cart) {
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
+    function formatPrice(value, currency) {
+      try {
+        return new Intl.NumberFormat('nl-NL', {
+          style: 'currency',
+          currency: currency || 'EUR'
+        }).format(value);
+      } catch (e) {
+        return value.toFixed(2) + ' ' + (currency || 'EUR');
+      }
+    }
+
+    function renderCart() {
+      const container = document.getElementById('cart-container');
+      const cart = loadCart();
+
+      if (!cart.length) {
+        container.innerHTML = '<p class="empty">Je winkelwagen is leeg. <a href="Index.html">Bekijk producten</a>.</p>';
+        return;
+      }
+
+      let html = '<table><thead><tr><th>Product</th><th>Aantal</th><th>Prijs</th><th class="text-right">Subtotaal</th><th></th></tr></thead><tbody>';
+      let total = 0;
+      const currency = cart[0].price_currency || 'EUR';
+
+      cart.forEach((item, index) => {
+        const line = item.price_retail * item.quantity;
+        total += line;
+        const img = item.main_image_url || 'https://via.placeholder.com/80x80?text=Product';
+
+        html += `
+          <tr>
+            <td>
+              <div class="name-cell">
+                <img src="${img}" alt="${item.name}">
+                <div>
+                  <div>${item.name}</div>
+                  <small><a href="product.html?slug=${encodeURIComponent(item.slug)}">Bekijk product</a></small>
+                </div>
+              </div>
+            </td>
+            <td>
+              <input type="number" min="1" value="${item.quantity}" data-index="${index}" class="qty-input">
+            </td>
+            <td>${formatPrice(item.price_retail, item.price_currency)}</td>
+            <td class="text-right">${formatPrice(line, item.price_currency)}</td>
+            <td class="text-right">
+              <button class="button-link" data-remove="${index}">Verwijder</button>
+            </td>
+          </tr>
+        `;
+      });
+
+      html += '</tbody></table>';
+
+      html += `
+        <div class="cart-summary">
+          Totaal (incl. btw):<br>
+          <strong>${formatPrice(total, currency)}</strong><br>
+          <small>Let op: dit is een indicatie, definitieve verzendkosten & btw bereken je in de checkout.</small><br>
+          <a href="betalen.html" class="btn-primary">Afrekenen</a>
+        </div>
+      `;
+
+      container.innerHTML = html;
+
+      // events
+      container.querySelectorAll('.qty-input').forEach(input => {
+        input.addEventListener('change', (e) => {
+          const idx = parseInt(e.target.getAttribute('data-index'), 10);
+          const newQty = Math.max(1, parseInt(e.target.value, 10) || 1);
+          const cart = loadCart();
+          cart[idx].quantity = newQty;
+          saveCart(cart);
+          renderCart();
+        });
+      });
+
+      container.querySelectorAll('[data-remove]').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const idx = parseInt(e.target.getAttribute('data-remove'), 10);
+          const cart = loadCart();
+          cart.splice(idx, 1);
+          saveCart(cart);
+          renderCart();
+        });
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', renderCart);
+  </script>
+</body>
+</html>
